@@ -7,34 +7,35 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.exercises.desafio_emprestimo.model.Client;
+import com.exercises.desafio_emprestimo.repository.ClientRepository;
 
 @Service
 public class ClientService {
 
     @Autowired
-    private com.exercises.desafio_emprestimo.repository.ClientRepository ClientRepository;
+    private ClientRepository clientRepository;
 
     public List<Client> findAll() {
-        return ClientRepository.findAll();
+        return clientRepository.findAll();
     }
 
     public Client findById(Long id) {
-        Optional<Client> obj = ClientRepository.findById(id);
+        Optional<Client> obj = clientRepository.findById(id);
         return obj.get();
     }
 
     public Client insert(Client obj) {
-        return ClientRepository.save(obj);
+        return clientRepository.save(obj);
     }
 
     public void delete(Long id) {
-        ClientRepository.deleteById(id);
+        clientRepository.deleteById(id);
     }
 
     public Client update(Long id, Client obj) {
-        Client entity = ClientRepository.getReferenceById(id);
+        Client entity = clientRepository.getReferenceById(id);
         updateData(entity, obj);
-        return ClientRepository.save(entity);
+        return clientRepository.save(entity);
     }
 
     private void updateData(Client entity, Client obj) {

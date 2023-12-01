@@ -1,11 +1,14 @@
 package com.exercises.desafio_emprestimo.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -26,7 +29,9 @@ public class Client {
 
   private String location;
 
-  private List<String> loans;
+  @OneToMany
+  @JoinColumn(name = "id")
+  private List<Loans> loans = new ArrayList<>();
 
   public Long getId() {
     return id;
@@ -76,11 +81,11 @@ public class Client {
     this.location = location;
   }
 
-  public List<String> getLoans() {
+  public List<Loans> getLoans() {
     return loans;
   }
 
-  public void setLoans(List<String> loans) {
+  public void setLoans(List<Loans> loans) {
     this.loans = loans;
   }
 
