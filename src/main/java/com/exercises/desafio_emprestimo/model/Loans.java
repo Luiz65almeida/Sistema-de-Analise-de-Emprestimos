@@ -4,17 +4,24 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.ManyToOne;
 
 @Entity
-@Table(name = "tb_loans")
 public class Loans {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String type;
 
     private Integer interestRate;
+
+    public Loans(String string, int i) {
+    }
+
+    @ManyToOne
+    private Client client;
 
     public String getType() {
         return type;

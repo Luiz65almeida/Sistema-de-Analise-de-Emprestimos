@@ -6,4 +6,6 @@ import com.exercises.desafio_emprestimo.model.Client;
 
 public interface ClientRepository extends JpaRepository<Client, Long> {
 
+  Client findByNameAndIncomeAndAgeAndLocation(String name, double income, int age, String location);
+
 }
