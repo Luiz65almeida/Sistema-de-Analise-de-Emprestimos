@@ -1,4 +1,4 @@
-# Desafio de Empréstimo - Serviço Spring Boot
+# Sistema de análise de emprestimos com java e Spring-boot
 
 **Descrição:**
 Este repositório contém uma implementação em Java usando Spring Boot para um serviço que determina as modalidades de empréstimo a que uma pessoa tem acesso com base em critérios específicos. As modalidades incluem Empréstimo Pessoal, Empréstimo Consignado e Empréstimo com Garantia, cada uma com taxas de juros distintas.
@@ -8,7 +8,7 @@ Este repositório contém uma implementação em Java usando Spring Boot para um
 - Spring Boot
 - JPA (Java Persistence API)
 - Hibernate
-- Maven (ou Gradle)
+- Maven
 
 **Funcionalidades Principais:**
 1. Determinação das modalidades de empréstimo com base na idade, salário e localização do cliente.
@@ -21,13 +21,20 @@ Este repositório contém uma implementação em Java usando Spring Boot para um
 3. Execute o aplicativo Spring Boot: `./mvnw spring-boot:run` (ou `./gradlew bootRun` se estiver usando Gradle)
 4. O serviço estará acessível em `http://localhost:8080/customer-loans` para receber solicitações.
 
-**Configuração do Banco de Dados:**
-- Certifique-se de configurar corretamente as propriedades do banco de dados no arquivo `application.properties` ou `application.yml` (por exemplo, URL, nome de usuário, senha).
+## Requisitos
 
+- Conceder o empréstimo pessoal se o salário do cliente for igual ou inferior a R$ 3000.
+- Conceder o empréstimo pessoal se o salário do cliente estiver entre R$ 3000 e R$ 5000, se o cliente tiver menos de 30
+  anos e residir em São Paulo (SP).
+- Conceder o empréstimo consignado se o salário do cliente for igual ou superior a R$ 5000.
+- Conceder o empréstimo com garantia se o salário do cliente for igual ou inferior a R$ 3000.
+- Conceder o empréstimo com garantia se o salário do cliente estiver entre R$ 3000 e R$ 5000, se o cliente tiver
+  menos de 30 anos e residir em São Paulo (SP).
+#
 **Exemplo de Solicitação HTTP:**
-```json
-[POST] http://localhost:8080/customer-loans
 
+**[POST]** `{{host}}/customer-loans`
+```json
 {
   "age": 26,
   "cpf": "123.456.789-01",
@@ -35,9 +42,13 @@ Este repositório contém uma implementação em Java usando Spring Boot para um
   "income": 5000.00,
   "location": "SP"
 }
+```
 
-
-Exemplo de Resposta:
+**Exemplo de Resposta:**
+```
+HTTP/1.1 200 Ok
+```
+```json
     {
       "customer": "Exemplo Cliente",
       "loans": [
@@ -51,4 +62,4 @@ Exemplo de Resposta:
         }
       ]
     }
-
+```
